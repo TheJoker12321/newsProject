@@ -13,7 +13,10 @@ function goForm() {
     document.getElementById('create-story').style.display = 'block'
 }
 
-const data = fetch(URL).then((data) => data.json())
+const data = fetch(URL).then((data) => data.json()).then((user) => user.articles)
 
-console.log(data);
+for (const article of data) {
 
+    console.log(article);
+    
+}
