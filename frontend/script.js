@@ -41,32 +41,30 @@ const articles = async () => {
                     <p class="text-paragraph">${article.description}</p>`
         time += 1
     }
-
+    
 }
-document.getElementById("send").addEventListener("click",(event)=> {
-        event.preventDefault()
+const preview = document.getElementById('imageForm')
+const fileInput = document.querySelector("input[type=file]");
 
-        const title = document.getElementById('title').value
-        const story = document.getElementById('story').value
-        const preview = document.querySelector("img");
-        const fileInput = document.querySelector("input[type=file]");
+            fileInput.addEventListener("change", previewFile);
 
-        fileInput.addEventListener("change", previewFile);
-
-        function previewFile() {
-
+            function previewFile() {
             const file = fileInput.files[0];
             const reader = new FileReader();
 
             reader.addEventListener("load", () => {
+            preview.src = reader.result;
+        });
 
-                preview.src = reader.result;
-            });
-
-            if (file) {
-                reader.readAsDataURL(file);
-            }
+        if (file) {
+        reader.readAsDataURL(file);
         }
+}
+document.getElementById("send").addEventListener("click",(event)=> {
+    event.preventDefault()
+
+        const title = document.getElementById('title').value
+        const story = document.getElementById('story').value
         const articles = document.getElementById('articles')
         const article = document.createElement('article')
         article.className = 'news'
@@ -85,4 +83,5 @@ document.getElementById("send").addEventListener("click",(event)=> {
 
     }
 )
+
 articles()
